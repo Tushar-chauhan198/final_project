@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
 import Navbar from './components/Navbar';
-import Product from './components/Product';
+import RenderProducts from './components/RenderProducts';
+import Cart from './components/Cart'
 
 const URL = "http://localhost:8080/products";
 
@@ -23,10 +25,11 @@ function App() {
   return (
     <div className="App">
       <Navbar />
-      <h2>Ecommerce</h2>
-      <div className='product-container'>
-        {productData && productData.map(prod => <Product {...prod} key={prod.id} />)}
-      </div>
+      <Routes>
+        <Route path='/' element={<RenderProducts {...{ productData }} />} />
+        <Route path='/cart' element={<Cart />} />
+      </Routes>
+
     </div>
   );
 }
